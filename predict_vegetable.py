@@ -2,16 +2,14 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_hub as hub
 import requests
+import json
 
 # Load in our model
 model = tf.keras.models.load_model(
   "./model",
   custom_objects={'KerasLayer': hub.KerasLayer})
 
-model.summary()
-
 # URL for image we want to run on our model
-IMAGE_URL = "https://fearlessfresh.com/wp-content/uploads/2015/07/Carrots-in-Hand.jpg"
 IMAGE_RES = 224
 
 # Method that gets an image from a URL and returns a numpy array we can use to predict
@@ -22,11 +20,18 @@ def get_tensor_from_image_url(url):
 
   return img[np.newaxis, ...]
 
-CLASSES = ['carrot', 'onion', 'tomato']
+# Put together a message to send back
+def assemble_message(vegetable):
+  message = "This looks like a..." + vegetable + "!"
+  return message
 
 # Predict using our model and print out the predicted label
-image = get_tensor_from_image_url(IMAGE_URL)
-prediction_results = model.predict(image)
-prediction_class = np.argmax(prediction_results[0], axis=-1)
-print(prediction_results[0])
-print("Predicted label: ", CLASSES[prediction_class])
+def predict(IMAGE_URL):
+  CLASSES = ['carrot', 'onion', 'tomato']
+
+  image = get_tensor_from_image_url(IMAGE_URL)
+  prediction_results = model.predict(image)
+  prediction_class = np.argmax(prediction_results[0], axis=-1)
+  predicted_vegetable = CLASSES[prediction_class]
+
+  return assemble_message(predicted_vegetable)
