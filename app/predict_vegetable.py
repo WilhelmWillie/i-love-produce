@@ -6,7 +6,7 @@ import json
 
 # Load in our model
 model = tf.keras.models.load_model(
-  "../model",
+  "./model",
   custom_objects={'KerasLayer': hub.KerasLayer})
 
 # URL for image we want to run on our model

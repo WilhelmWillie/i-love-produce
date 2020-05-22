@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
-from predict_vegetable import predict
+from .predict_vegetable import predict
 
 app = Flask(__name__)
 
