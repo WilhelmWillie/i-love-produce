@@ -22,7 +22,13 @@ def get_tensor_from_image_url(url):
 
 # Put together a message to send back
 def assemble_message(vegetable):
-  message = "This looks like a..." + vegetable + "!"
+  expiration = {
+    "carrot": "14-21 days in the fridge",
+    "onion": "7-10 days on a countertop/pantry",
+    "tomato": "7-10 days on a countertop/pantry"
+  }
+
+  message = "hello - this looks like a(n)... " + vegetable + "! a(n) " + vegetable + " is good for " + expiration[vegetable] + ". hope this helped!"
   return message
 
 # Predict using our model and print out the predicted label
