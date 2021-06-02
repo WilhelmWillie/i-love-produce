@@ -41,7 +41,7 @@ tensorflow-estimator==2.2.0
 tensorflow-hub==0.8.0
 termcolor==1.1.0
 twilio==6.40.0
-urllib3==1.25.9
+urllib3==1.26.5
 Werkzeug==1.0.1
 wrapt==1.12.1
 zipp==3.1.0
